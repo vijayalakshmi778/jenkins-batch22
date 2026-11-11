@@ -1,11 +1,528 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NovaTech | Digital Solutions</title>
+
+<style>
+/* GLOBAL */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    scroll-behavior: smooth;
+}
+
+:root {
+    --primary: #635bff;
+    --secondary: #00bcd4;
+    --bg: #f8f9ff;
+    --text: #20243a;
+    --card: #ffffff;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    transition: 0.3s;
+}
+
+body.dark {
+    --bg: #101426;
+    --text: #ffffff;
+    --card: #1c2540;
+}
+
+/* NAVBAR */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 8%;
+    background: var(--card);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 15px #00000010;
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: bold;
+    color: var(--primary);
+}
+
+nav ul {
+    display: flex;
+    gap: 30px;
+    list-style: none;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--text);
+    font-weight: 600;
+}
+
+nav a:hover {
+    color: var(--primary);
+}
+
+.theme-btn {
+    border: none;
+    background: var(--primary);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+/* HERO */
+.hero {
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 70px 8%;
+    gap: 40px;
+}
+
+.hero-content {
+    max-width: 600px;
+    animation: slideIn 1s ease;
+}
+
+.hero h1 {
+    font-size: 55px;
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+
+.hero h1 span {
+    color: var(--primary);
+}
+
+.hero p {
+    font-size: 17px;
+    line-height: 1.8;
+    margin-bottom: 30px;
+    opacity: 0.8;
+}
+
+.btn {
+    display: inline-block;
+    padding: 14px 28px;
+    background: var(--primary);
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    transform: translateY(-4px);
+    background: #4840dc;
+}
+
+.hero-image {
+    width: 380px;
+    height: 380px;
+    border-radius: 30% 70% 60% 40%;
+    background: linear-gradient(135deg, #635bff, #00bcd4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 120px;
+    animation: float 4s infinite ease-in-out;
+}
+
+/* SECTION */
+section {
+    padding: 80px 8%;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+.section-title h2 {
+    font-size: 35px;
+    margin-bottom: 12px;
+}
+
+.section-title p {
+    opacity: 0.7;
+}
+
+/* SERVICES */
+.services {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.card {
+    background: var(--card);
+    padding: 35px;
+    border-radius: 15px;
+    box-shadow: 0 5px 25px #00000008;
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 30px #635bff20;
+}
+
+.card .icon {
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+
+.card h3 {
+    margin-bottom: 15px;
+}
+
+.card p {
+    line-height: 1.7;
+    opacity: 0.75;
+}
+
+/* ABOUT */
+.about {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+
+.about-box {
+    flex: 1;
+    background: linear-gradient(135deg, #635bff, #00bcd4);
+    min-height: 300px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 100px;
+}
+
+.about-content {
+    flex: 1;
+}
+
+.about-content h2 {
+    font-size: 35px;
+    margin-bottom: 20px;
+}
+
+.about-content p {
+    line-height: 1.8;
+    margin-bottom: 20px;
+    opacity: 0.8;
+}
+
+/* CONTACT */
+.contact-container {
+    max-width: 600px;
+    margin: auto;
+    background: var(--card);
+    padding: 35px;
+    border-radius: 15px;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 14px;
+    margin: 12px 0;
+    border: 1px solid #cccccc80;
+    border-radius: 8px;
+    background: var(--bg);
+    color: var(--text);
+    outline: none;
+}
+
+input:focus, textarea:focus {
+    border-color: var(--primary);
+}
+
+textarea {
+    height: 120px;
+    resize: vertical;
+}
+
+/* FOOTER */
+footer {
+    text-align: center;
+    padding: 25px;
+    background: var(--card);
+    opacity: 0.9;
+}
+
+/* ANIMATIONS */
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* RESPONSIVE */
+@media(max-width: 850px) {
+    .hero {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .hero h1 {
+        font-size: 40px;
+    }
+
+    .hero-image {
+        width: 280px;
+        height: 280px;
+    }
+
+    .services {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .about {
+        flex-direction: column;
+    }
+}
+
+@media(max-width: 600px) {
+    nav {
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    nav ul {
+        width: 100%;
+        justify-content: center;
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+
+    .services {
+        grid-template-columns: 1fr;
+    }
+
+    .hero h1 {
+        font-size: 34px;
+    }
+}
+</style>
 </head>
+
 <body>
-    <h1>helllooooooooooooooooooooooooooooo</h1>
+
+<!-- NAVBAR -->
+<nav>
+    <div class="logo">NovaTech.</div>
+
+    <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+
+    <button class="theme-btn" onclick="toggleTheme()">🌙 Theme</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+
+    <div class="hero-content">
+        <h1>Build Your Future With <span>Digital Innovation.</span></h1>
+
+        <p>
+            We create innovative digital experiences through
+            modern technology, creative thinking and smart solutions.
+        </p>
+
+        <a href="#services" class="btn">Explore Services →</a>
+    </div>
+
+    <div class="hero-image">
+        🚀
+    </div>
+
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+
+    <div class="section-title">
+        <h2>Our Services</h2>
+        <p>Discover what we can do for your business.</p>
+    </div>
+
+    <div class="services">
+
+        <div class="card">
+            <div class="icon">💻</div>
+            <h3>Web Development</h3>
+            <p>Build responsive, modern and user-friendly websites.</p>
+        </div>
+
+        <div class="card">
+            <div class="icon">📊</div>
+            <h3>Data Analytics</h3>
+            <p>Transform raw data into meaningful business insights.</p>
+        </div>
+
+        <div class="card">
+            <div class="icon">☁️</div>
+            <h3>Cloud Solutions</h3>
+            <p>Deploy and manage scalable cloud infrastructure.</p>
+        </div>
+
+        <div class="card">
+            <div class="icon">🤖</div>
+            <h3>Artificial Intelligence</h3>
+            <p>Build intelligent solutions using modern AI technologies.</p>
+        </div>
+
+        <div class="card">
+            <div class="icon">🔐</div>
+            <h3>Cyber Security</h3>
+            <p>Protect applications, networks and digital assets.</p>
+        </div>
+
+        <div class="card">
+            <div class="icon">⚙️</div>
+            <h3>DevOps Solutions</h3>
+            <p>Automate software development and deployment workflows.</p>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+
+    <div class="about">
+
+        <div class="about-box">🌐</div>
+
+        <div class="about-content">
+            <h2>About Our Company</h2>
+
+            <p>
+                We are passionate about technology and innovation.
+                Our mission is to help businesses grow through
+                digital transformation and modern IT solutions.
+            </p>
+
+            <p>
+                Our team focuses on creativity, quality,
+                customer satisfaction and continuous improvement.
+            </p>
+
+            <a href="#contact" class="btn">Contact Us</a>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+
+    <div class="section-title">
+        <h2>Get In Touch</h2>
+        <p>Have a project in mind? Let's talk!</p>
+    </div>
+
+    <div class="contact-container">
+
+        <form id="contactForm">
+
+            <input type="text" id="name"
+                placeholder="Your Name" required>
+
+            <input type="email" id="email"
+                placeholder="Your Email" required>
+
+            <input type="text" id="subject"
+                placeholder="Subject" required>
+
+            <textarea id="message"
+                placeholder="Your Message" required></textarea>
+
+            <button type="submit" class="btn">
+                Send Message →
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <p>© 2026 NovaTech. All Rights Reserved.</p>
+    <p>Designed with HTML, CSS & JavaScript.</p>
+</footer>
+
+<script>
+
+// DARK / LIGHT THEME
+function toggleTheme() {
+    document.body.classList.toggle("dark");
+
+    const button = document.querySelector(".theme-btn");
+
+    if (document.body.classList.contains("dark")) {
+        button.innerHTML = "☀️ Theme";
+    } else {
+        button.innerHTML = "🌙 Theme";
+    }
+}
+
+// CONTACT FORM VALIDATION
+document.getElementById("contactForm")
+.addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const subject = document.getElementById("subject").value.trim();
+    const message = document.getElementById("message").value.trim();
+
+    if (!name || !email || !subject || !message) {
+        alert("Please fill in all fields.");
+        return;
+    }
+
+    alert("Thank you " + name + "! Your message has been validated.");
+
+    this.reset();
+
+});
+
+</script>
+
 </body>
 </html>
